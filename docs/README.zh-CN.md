@@ -2,7 +2,7 @@
 
 这是一个用于 [Bilibili 视频系列](https://space.bilibili.com/61979921/lists/8070807?type=season)的模组。
 
-<div align="center">[English](../README.md) | 简体中文</div>
+<div align="center"><a href="../README.md">English</a> | 简体中文</div>
 
 兼容版本：Slay the Spire 2 稳定版（非 beta 版）。
 

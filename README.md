@@ -2,7 +2,7 @@
 
 A mod for a series of [Bilibili videos](https://space.bilibili.com/61979921/lists/8070807?type=season).
 
-<div align="center">English | [简体中文](docs/README.zh-CN.md)</div>
+<div align="center">English | <a href="docs/README.zh-CN.md">简体中文</a></div>
 
 Compatible with: Slay the Spire 2 stable release (non-beta).
 
