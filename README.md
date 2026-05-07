@@ -1,10 +1,46 @@
 # SlayTheSpireIsTooEasy
 
-## 用户设置
+A mod for a series of [Bilibili videos](https://space.bilibili.com/61979921/lists/8070807?type=season).
 
-模组会在模组目录下读取 `config.ini`。如果文件不存在，模组会在启动时自动创建一份默认配置。
+<div align="center">English | [简体中文](docs/README.zh-CN.md)</div>
 
-默认配置如下：
+Compatible with: Slay the Spire 2 stable release (non-beta).
+
+## Introduction
+
+This mod began as a set of whimsical ideas proposed by the video owner and other collaborators. I am only the programmer.
+
+The rest of this document is organized as follows:
+
+- [Installation](#installation) shows how to install the mod.
+- [Cards](#cards) shows the extra cards provided by this mod.
+- [User Config](#user-config) shows the available user config options and which features they control.
+- [Collaborators](#collaborators) lists the other collaborators' social links. I am the only programmer for this mod.
+
+## Installation
+
+Download `SlayTheSpireIsTooEasy.zip` from the [release](https://github.com/kaatenn/SlayTheSpireIsTooEasy/releases/tag/v0.0.0).
+After extracting it, put `ModConfig.dll` and `ModConfig.pck` into `mods/SlayTheSpireIsTooEasy/` under the game directory.
+
+## Cards
+
+### Genetic Snake Bite
+
+- Cost: 2
+- Type: Skill
+- Rarity: Ancient
+- Target: All enemies
+- Keyword: Ethereal
+
+Apply Poison to all enemies. Each time this card is played, permanently increase this card's Poison value for the current run.
+
+Upgrading Genetic Snake Bite increases the amount of Poison gained after each play.
+
+## User Config
+
+The mod reads `config.ini` from the mod directory. If the file does not exist, the mod creates a default config file on startup.
+
+The default config is:
 
 ```ini
 [Gameplay]
@@ -17,26 +53,28 @@ GeneticSnakeBite=false
 RegentStartingDeckHasSnakeBite=false
 ```
 
-`[Gameplay]` 用于游戏机制调整：
+`[Gameplay]` controls gameplay changes:
 
-- `MonsterIntangiblePerTurn`：怪物每回合获得无形。
-- `UpgradeToReplay`：升级相关效果改为重新打出。
-- `ForgeGiveMonsterStrength`：锻造相关效果给予怪物力量。
+- `MonsterIntangiblePerTurn`: Monsters gain Intangible each turn.
+- `UpgradeToReplay`: Upgrade effects are changed to add replay stacks, and the upgrade limit is removed.
+- `ForgeGiveMonsterStrength`: Forge effects give Strength to monsters. On the first forge, monsters are stunned and gain Intangible.
 
-`[Cards]` 用于新增或修改卡牌：
+`[Cards]` controls new or modified cards:
 
-- `GeneticSnakeBite`：启用遗传蛇咬。
-- `RegentStartingDeckHasSnakeBite`：将遗传蛇咬加入观者初始牌组，并移除初始牌组中的打击。此设置需要同时启用 `GeneticSnakeBite`。
+- `GeneticSnakeBite`: Enables Genetic Snake Bite.
+- `RegentStartingDeckHasSnakeBite`: Adds Genetic Snake Bite to the Regent's starting deck and removes Strike from the starting deck. This setting also requires `GeneticSnakeBite` to be enabled.
 
-配置值支持以下布尔写法：
+Config values support these boolean forms:
 
-- 开启：`true`、`1`、`yes`、`y`、`on`
-- 关闭：`false`、`0`、`no`、`n`、`off`
+- Enabled: `true`, `1`, `yes`, `y`, `on`
+- Disabled: `false`, `0`, `no`, `n`, `off`
 
-INI 支持空行，以及以 `;` 或 `#` 开头的整行注释。无法识别的配置值会使用模组默认值。
+INI files support blank lines and full-line comments that start with `;` or `#`. Unrecognized config values fall back to the mod defaults.
 
-## 开发
+## Collaborators
 
-## 构建
-
-## 许可
+- [cakeko](https://space.bilibili.com/61979921)
+- [MuyeNaiNai](https://space.bilibili.com/269519870)
+- Medicine_Doll
+    - [bilibili](https://space.bilibili.com/14396838)
+    - [twitter](https://x.com/Medicine_Doll51)
