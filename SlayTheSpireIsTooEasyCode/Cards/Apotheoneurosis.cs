@@ -22,7 +22,8 @@ public class Apotheoneurosis() : SlayTheSpireIsTooEasyCard(2,
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
     [
-        CardKeyword.Retain
+        CardKeyword.Retain,
+        CardKeyword.Innate
     ];
 
     public override int MaxUpgradeLevel => 999;
