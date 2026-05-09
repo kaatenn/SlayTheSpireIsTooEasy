@@ -3,7 +3,9 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Multiplayer;
 using MegaCrit.Sts2.Core.Entities.Players;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.Cards;
@@ -47,6 +49,7 @@ public static class HookAfterForgePatch
             }
 
             await PowerCmd.Apply<StrengthPower>(
+                new ThrowingPlayerChoiceContext(),
                 enemy,
                 amount,
                 forger.Creature,
@@ -62,6 +65,7 @@ public static class HookAfterForgePatch
             await CreatureCmd.Stun(enemy);
 
             await PowerCmd.Apply<IntangiblePower>(
+                new ThrowingPlayerChoiceContext(),
                 enemy,
                 1M,
                 forger.Creature,

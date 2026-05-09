@@ -73,7 +73,8 @@ public class GeneticSnakeBite() : SlayTheSpireIsTooEasyCard(
             VfxCmd.PlayOnCreatureCenter(enemy, "vfx/vfx_bite");
         }
 
-        await PowerCmd.Apply<PoisonPower>(enemies, DynamicVars.Poison.BaseValue, Owner.Creature, this, true);
+        await PowerCmd.Apply<PoisonPower>(choiceContext, Owner.Creature, DynamicVars.Poison.BaseValue,
+            this.Owner.Creature, this, true);
 
         int poisonIncrease = DynamicVars[IncreaseKey].IntValue;
         BuffFromPlay(poisonIncrease);

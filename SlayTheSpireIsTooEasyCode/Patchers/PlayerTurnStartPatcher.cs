@@ -2,6 +2,7 @@ using HarmonyLib;
 using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Hooks;
 using MegaCrit.Sts2.Core.Models.Powers;
 
@@ -26,7 +27,7 @@ public static class HookAfterSideTurnStartPatch
                 continue;
             }
 
-            await PowerCmd.Apply<IntangiblePower>(enemy, 1M, enemy, null);
+            await PowerCmd.Apply<IntangiblePower>(new ThrowingPlayerChoiceContext(), enemy, 1M, enemy, null);
         }
     }
 }
