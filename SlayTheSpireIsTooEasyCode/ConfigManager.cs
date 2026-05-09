@@ -24,7 +24,13 @@ public class ConfigManager
 
     private const bool GeneticSnakeBiteDefault = false;
 
-    private const bool RegentStartingDeckHasSnakeBiteDefault = false;
+    private const bool ApotheoneurosisDefault = false;
+
+    private const bool StartingDeckHasCustomCardsDefault = false;
+
+    private const string CharacterModifyStartingDeckDefault = "Ironclad";
+
+    private const bool RemoveAllStartDeckDefault = false;
 
     public static ConfigManager? Instance;
 
@@ -36,7 +42,13 @@ public class ConfigManager
 
     public bool GeneticSnakeBite { get; private set; } = GeneticSnakeBiteDefault;
 
-    public bool RegentStartingDeckHasSnakeBite { get; private set; } = RegentStartingDeckHasSnakeBiteDefault;
+    public bool Apotheoneurosis { get; private set; } = ApotheoneurosisDefault;
+
+    public bool StartingDeckHasCustomCards { get; private set; } = StartingDeckHasCustomCardsDefault;
+
+    public string CharacterModifyStartingDeck { get; private set; } = CharacterModifyStartingDeckDefault;
+
+    public bool RemoveAllStartDeck { get; private set; } = RemoveAllStartDeckDefault;
 
     public ConfigManager()
     {
@@ -49,6 +61,7 @@ public class ConfigManager
         var dir = ResolveModDirectory();
         Directory.CreateDirectory(dir);
         CreateDefaultConfigIfMissing(dir);
+        CompleteMissingDefaultConfigEntries(dir);
 
         Dictionary<string, Dictionary<string, string>> config = ParseIniConfig(dir);
         MonsterIntangiblePerTurn = ReadBool(config, GameplaySection, nameof(MonsterIntangiblePerTurn),
@@ -57,8 +70,12 @@ public class ConfigManager
         ForgeGiveMonsterStrength = ReadBool(config, GameplaySection, nameof(ForgeGiveMonsterStrength),
             ForgeGiveMonsterStrengthDefault);
         GeneticSnakeBite = ReadBool(config, CardsSection, nameof(GeneticSnakeBite), GeneticSnakeBiteDefault);
-        RegentStartingDeckHasSnakeBite = ReadBool(config, CardsSection, nameof(RegentStartingDeckHasSnakeBite),
-            RegentStartingDeckHasSnakeBiteDefault);
+        Apotheoneurosis = ReadBool(config, CardsSection, nameof(Apotheoneurosis), ApotheoneurosisDefault);
+        StartingDeckHasCustomCards = ReadBool(config, CardsSection, nameof(StartingDeckHasCustomCards),
+            StartingDeckHasCustomCardsDefault);
+        CharacterModifyStartingDeck = ReadString(config, CardsSection, nameof(CharacterModifyStartingDeck),
+            CharacterModifyStartingDeckDefault);
+        RemoveAllStartDeck = ReadBool(config, CardsSection, nameof(RemoveAllStartDeck), RemoveAllStartDeckDefault);
     }
 
     private static void CreateDefaultConfigIfMissing(string rootDir)
@@ -78,10 +95,115 @@ public class ConfigManager
             string.Empty,
             $"[{CardsSection}]",
             $"{nameof(GeneticSnakeBite)}={GeneticSnakeBiteDefault.ToString().ToLowerInvariant()}",
-            $"{nameof(RegentStartingDeckHasSnakeBite)}={RegentStartingDeckHasSnakeBiteDefault.ToString().ToLowerInvariant()}"
+            $"{nameof(Apotheoneurosis)}={ApotheoneurosisDefault.ToString().ToLowerInvariant()}",
+            $"{nameof(StartingDeckHasCustomCards)}={StartingDeckHasCustomCardsDefault.ToString().ToLowerInvariant()}",
+            $"{nameof(CharacterModifyStartingDeck)}={CharacterModifyStartingDeckDefault}",
+            $"{nameof(RemoveAllStartDeck)}={RemoveAllStartDeckDefault.ToString().ToLowerInvariant()}"
         ];
 
         File.WriteAllLines(configPath, lines);
+    }
+
+    private static void CompleteMissingDefaultConfigEntries(string rootDir)
+    {
+        string configPath = Path.Combine(rootDir, ConfigFileName);
+        Dictionary<string, Dictionary<string, string>> config = ParseIniConfig(rootDir);
+
+        List<string> missingGameplayEntries = GetMissingEntries(config, GameplaySection,
+        [
+            (nameof(MonsterIntangiblePerTurn), MonsterIntangiblePerTurnDefault),
+            (nameof(UpgradeToReplay), UpgradeToReplayDefault),
+            (nameof(ForgeGiveMonsterStrength), ForgeGiveMonsterStrengthDefault)
+        ]);
+
+        List<string> missingCardEntries = GetMissingEntries(config, CardsSection,
+        [
+            (nameof(GeneticSnakeBite), GeneticSnakeBiteDefault),
+            (nameof(Apotheoneurosis), ApotheoneurosisDefault),
+            (nameof(StartingDeckHasCustomCards), StartingDeckHasCustomCardsDefault),
+            (nameof(RemoveAllStartDeck), RemoveAllStartDeckDefault)
+        ]);
+
+        List<string> missingCardStringEntries = GetMissingEntries(config, CardsSection,
+        [
+            (nameof(CharacterModifyStartingDeck), CharacterModifyStartingDeckDefault)
+        ]);
+
+        if (missingGameplayEntries.Count == 0 && missingCardEntries.Count == 0 && missingCardStringEntries.Count == 0)
+        {
+            return;
+        }
+
+        List<string> lines = File.Exists(configPath)
+            ? File.ReadAllLines(configPath).ToList()
+            : [];
+
+        AddMissingEntries(lines, GameplaySection, missingGameplayEntries);
+        AddMissingEntries(lines, CardsSection, missingCardEntries);
+        AddMissingEntries(lines, CardsSection, missingCardStringEntries);
+        File.WriteAllLines(configPath, lines);
+    }
+
+    private static List<string> GetMissingEntries(
+        Dictionary<string, Dictionary<string, string>> config,
+        string section,
+        IEnumerable<(string Key, bool DefaultValue)> defaults)
+    {
+        config.TryGetValue(section, out Dictionary<string, string>? sectionConfig);
+
+        return defaults
+            .Where(entry => sectionConfig == null || !sectionConfig.ContainsKey(entry.Key))
+            .Select(entry => $"{entry.Key}={entry.DefaultValue.ToString().ToLowerInvariant()}")
+            .ToList();
+    }
+
+    private static List<string> GetMissingEntries(
+        Dictionary<string, Dictionary<string, string>> config,
+        string section,
+        IEnumerable<(string Key, string DefaultValue)> defaults)
+    {
+        config.TryGetValue(section, out Dictionary<string, string>? sectionConfig);
+
+        return defaults
+            .Where(entry => sectionConfig == null || !sectionConfig.ContainsKey(entry.Key))
+            .Select(entry => $"{entry.Key}={entry.DefaultValue}")
+            .ToList();
+    }
+
+    private static void AddMissingEntries(List<string> lines, string section, List<string> entries)
+    {
+        if (entries.Count == 0)
+        {
+            return;
+        }
+
+        int sectionIndex =
+            lines.FindIndex(line => line.Trim().Equals($"[{section}]", StringComparison.OrdinalIgnoreCase));
+        if (sectionIndex < 0)
+        {
+            if (lines.Count > 0 && !string.IsNullOrWhiteSpace(lines[^1]))
+            {
+                lines.Add(string.Empty);
+            }
+
+            lines.Add($"[{section}]");
+            lines.AddRange(entries);
+            return;
+        }
+
+        int insertIndex = sectionIndex + 1;
+        while (insertIndex < lines.Count)
+        {
+            string line = lines[insertIndex].Trim();
+            if (line.StartsWith('[') && line.EndsWith(']'))
+            {
+                break;
+            }
+
+            insertIndex++;
+        }
+
+        lines.InsertRange(insertIndex, entries);
     }
 
     private static bool ReadBool(
@@ -97,6 +219,22 @@ public class ConfigManager
         }
 
         return ParseBool(rawValue, defaultValue);
+    }
+
+    private static string ReadString(
+        Dictionary<string, Dictionary<string, string>> config,
+        string section,
+        string key,
+        string defaultValue)
+    {
+        if (!config.TryGetValue(section, out Dictionary<string, string>? sectionConfig) ||
+            !sectionConfig.TryGetValue(key, out string? rawValue))
+        {
+            return defaultValue;
+        }
+
+        string value = rawValue.Trim();
+        return value.Length == 0 ? defaultValue : value;
     }
 
     private static bool ParseBool(string value, bool defaultValue)

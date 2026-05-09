@@ -8,7 +8,8 @@ Compatible with: Slay the Spire 2 stable release (non-beta).
 
 ## Introduction
 
-This mod began as a set of whimsical ideas proposed by the video owner and other collaborators. I am only the programmer.
+This mod began as a set of whimsical ideas proposed by the video owner and other collaborators. I am only the
+programmer.
 
 The rest of this document is organized as follows:
 
@@ -19,8 +20,10 @@ The rest of this document is organized as follows:
 
 ## Installation
 
-Download `SlayTheSpireIsTooEasy.zip` from the [release](https://github.com/kaatenn/SlayTheSpireIsTooEasy/releases/tag/v0.0.0).
-After extracting it, put `ModConfig.dll` and `ModConfig.pck` into `mods/SlayTheSpireIsTooEasy/` under the game directory.
+Download `SlayTheSpireIsTooEasy.zip` from
+the [release](https://github.com/kaatenn/SlayTheSpireIsTooEasy/releases/tag/v0.0.0).
+After extracting it, put `ModConfig.dll` and `ModConfig.pck` into `mods/SlayTheSpireIsTooEasy/` under the game
+directory.
 
 ## Cards
 
@@ -32,13 +35,15 @@ After extracting it, put `ModConfig.dll` and `ModConfig.pck` into `mods/SlayTheS
 - Target: All enemies
 - Keyword: Ethereal
 
-Apply Poison to all enemies. Each time this card is played, permanently increase this card's Poison value for the current run.
+Apply Poison to all enemies. Each time this card is played, permanently increase this card's Poison value for the
+current run.
 
 Upgrading Genetic Snake Bite increases the amount of Poison gained after each play.
 
 ## User Config
 
-The mod reads `config.ini` from the mod directory. If the file does not exist, the mod creates a default config file on startup.
+The mod reads `config.ini` from the mod directory. If the file does not exist, the mod creates a default config file on
+startup.
 
 The default config is:
 
@@ -50,26 +55,35 @@ ForgeGiveMonsterStrength=false
 
 [Cards]
 GeneticSnakeBite=false
-RegentStartingDeckHasSnakeBite=false
+Apotheoneurosis=false
+StartingDeckHasCustomCards=false
+CharacterModifyStartingDeck=Ironclad
+RemoveAllStartDeck=false
 ```
 
 `[Gameplay]` controls gameplay changes:
 
 - `MonsterIntangiblePerTurn`: Monsters gain Intangible each turn.
 - `UpgradeToReplay`: Upgrade effects are changed to add replay stacks, and the upgrade limit is removed.
-- `ForgeGiveMonsterStrength`: Forge effects give Strength to monsters. On the first forge, monsters are stunned and gain Intangible.
+- `ForgeGiveMonsterStrength`: Forge effects give Strength to monsters. On the first forge, monsters are stunned and gain
+  Intangible.
 
 `[Cards]` controls new or modified cards:
 
 - `GeneticSnakeBite`: Enables Genetic Snake Bite.
-- `RegentStartingDeckHasSnakeBite`: Adds Genetic Snake Bite to the Regent's starting deck and removes Strike from the starting deck. This setting also requires `GeneticSnakeBite` to be enabled.
+- `Apotheoneurosis`: Enables Apotheoneurosis.
+- `StartingDeckHasCustomCards`: Adds enabled custom cards to the configured character's starting deck.
+- `CharacterModifyStartingDeck`: Selects which character's starting deck is modified.
+- `RemoveAllStartDeck`: Removes all starting deck cards for every character and replaces them with enabled custom cards.
+  This only applies when at least one custom card is enabled.
 
 Config values support these boolean forms:
 
 - Enabled: `true`, `1`, `yes`, `y`, `on`
 - Disabled: `false`, `0`, `no`, `n`, `off`
 
-INI files support blank lines and full-line comments that start with `;` or `#`. Unrecognized config values fall back to the mod defaults.
+INI files support blank lines and full-line comments that start with `;` or `#`. Unrecognized config values fall back to
+the mod defaults.
 
 ## Collaborators
 

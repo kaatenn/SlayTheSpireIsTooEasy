@@ -1,4 +1,6 @@
 {
   "SLAYTHESPIREISTOOEASY-GENETIC_SNAKE_BITE.description": "Apply {PoisonPower:diff()} [gold]Poison[/gold] to ALL enemies.\nEach time this is played, permanently increase this card's [gold]Poison[/gold] by {Increase:diff()} for this run.",
-  "SLAYTHESPIREISTOOEASY-GENETIC_SNAKE_BITE.title": "Genetic Snake Bite"
+  "SLAYTHESPIREISTOOEASY-GENETIC_SNAKE_BITE.title": "Genetic Snake Bite",
+  "SLAYTHESPIREISTOOEASY-APOTHEONEUROSIS.description": "Play {Cards:diff()} random cards.",
+  "SLAYTHESPIREISTOOEASY-APOTHEONEUROSIS.title": "Apotheoneurosis"
 }

@@ -1,4 +1,6 @@
 {
   "SLAYTHESPIREISTOOEASY-GENETIC_SNAKE_BITE.description": "给予所有敌人{PoisonPower:diff()}层[gold]中毒[/gold]。\n每打出一次，这张牌在本局游戏中的[gold]中毒[/gold]值永久增加{Increase:diff()}层。",
-  "SLAYTHESPIREISTOOEASY-GENETIC_SNAKE_BITE.title": "遗传蛇咬"
+  "SLAYTHESPIREISTOOEASY-GENETIC_SNAKE_BITE.title": "遗传蛇咬",
+  "SLAYTHESPIREISTOOEASY-APOTHEONEUROSIS.description": "打出{Cards:diff()}张随机牌。",
+  "SLAYTHESPIREISTOOEASY-APOTHEONEUROSIS.title": "神金"
 }

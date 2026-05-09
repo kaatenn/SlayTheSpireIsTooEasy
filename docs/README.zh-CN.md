@@ -19,7 +19,8 @@
 
 ## 安装
 
-从 [release](https://github.com/kaatenn/SlayTheSpireIsTooEasy/releases/tag/v0.0.0) 中下载模组压缩包 `SlayTheSpireIsTooEasy.zip`。
+从 [release](https://github.com/kaatenn/SlayTheSpireIsTooEasy/releases/tag/v0.0.0) 中下载模组压缩包
+`SlayTheSpireIsTooEasy.zip`。
 解压后将 `ModConfig.dll` 和 `ModConfig.pck` 放入游戏目录 `mods/SlayTheSpireIsTooEasy/` 即可。
 
 ## 卡牌
@@ -38,7 +39,10 @@ ForgeGiveMonsterStrength=false
 
 [Cards]
 GeneticSnakeBite=false
-RegentStartingDeckHasSnakeBite=false
+Apotheoneurosis=false
+StartingDeckHasCustomCards=false
+CharacterModifyStartingDeck=Ironclad
+RemoveAllStartDeck=false
 ```
 
 `[Gameplay]` 用于控制游戏机制调整：
@@ -50,7 +54,10 @@ RegentStartingDeckHasSnakeBite=false
 `[Cards]` 用于控制新增或修改的卡牌：
 
 - `GeneticSnakeBite`：启用遗传蛇咬。
-- `RegentStartingDeckHasSnakeBite`：将遗传蛇咬加入储君初始牌组，并移除初始牌组中的打击。此设置需要同时启用 `GeneticSnakeBite`。
+- `Apotheoneurosis`：启用神金。
+- `StartingDeckHasCustomCards`：将已启用的自定义卡牌加入指定职业的初始牌组。
+- `CharacterModifyStartingDeck`：指定需要修改初始牌组的职业。
+- `RemoveAllStartDeck`：删除所有职业初始牌组中的全部卡牌，并替换为已启用的自定义卡牌。此项只有在至少启用一张自定义卡牌时才生效。
 
 配置值支持以下布尔写法：
 
@@ -64,5 +71,5 @@ INI 支持空行，以及以 `;` 或 `#` 开头的整行注释。无法识别的
 - [cakeko](https://space.bilibili.com/61979921)
 - [MuyeNaiNai](https://space.bilibili.com/269519870)
 - Medicine_Doll
-  - [bilibili](https://space.bilibili.com/14396838)
-  - [twitter](https://x.com/Medicine_Doll51)
+    - [bilibili](https://space.bilibili.com/14396838)
+    - [twitter](https://x.com/Medicine_Doll51)

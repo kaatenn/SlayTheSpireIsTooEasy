@@ -43,9 +43,10 @@ public partial class MainFile : Node
             RemoveIncompatibleBaseLibPatches(harmony);
         }
 
-        if (config is { GeneticSnakeBite: true, RegentStartingDeckHasSnakeBite: true })
+        if (config.StartingDeckHasCustomCards || (config.RemoveAllStartDeck &&
+                                                  (config.GeneticSnakeBite || config.Apotheoneurosis)))
         {
-            harmony.CreateClassProcessor(typeof(RegentStartingDeckPatcher)).Patch();
+            harmony.CreateClassProcessor(typeof(StartingDeckPatcher)).Patch();
         }
     }
 
