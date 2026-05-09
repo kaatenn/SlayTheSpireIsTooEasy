@@ -17,7 +17,7 @@ public class Apotheoneurosis() : SlayTheSpireIsTooEasyCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(10)
+        new CardsVar(4)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -53,6 +53,6 @@ public class Apotheoneurosis() : SlayTheSpireIsTooEasyCard(2,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(4);
+        DynamicVars.Cards.UpgradeValueBy(CurrentUpgradeLevel);
     }
 }
