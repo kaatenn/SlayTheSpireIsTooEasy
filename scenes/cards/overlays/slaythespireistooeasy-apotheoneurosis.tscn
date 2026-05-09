@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/cards/overlays/infection.tscn" id="1"]
+
+[node name="ApotheoneurosisOverlay" instance=ExtResource("1")]

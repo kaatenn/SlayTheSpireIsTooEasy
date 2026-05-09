@@ -17,7 +17,7 @@ public class Apotheoneurosis() : SlayTheSpireIsTooEasyCard(2,
 {
     protected override IEnumerable<DynamicVar> CanonicalVars =>
     [
-        new CardsVar(30)
+        new CardsVar(10)
     ];
 
     public override IEnumerable<CardKeyword> CanonicalKeywords =>
@@ -26,6 +26,8 @@ public class Apotheoneurosis() : SlayTheSpireIsTooEasyCard(2,
     ];
 
     public override int MaxUpgradeLevel => 999;
+
+    public override bool HasBuiltInOverlay => true;
 
     protected override async Task OnPlay(
         PlayerChoiceContext choiceContext,
@@ -50,6 +52,6 @@ public class Apotheoneurosis() : SlayTheSpireIsTooEasyCard(2,
 
     protected override void OnUpgrade()
     {
-        DynamicVars.Cards.UpgradeValueBy(5);
+        DynamicVars.Cards.UpgradeValueBy(4);
     }
 }
